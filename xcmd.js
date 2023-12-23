@@ -19,6 +19,9 @@ const { execSync } = require('child_process');
         }
 
         yargs.showHelp()
+        return
     }
+
+    yargs.showHelp()
 
 })()
