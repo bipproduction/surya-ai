@@ -5,7 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SURYA AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Encode+Sans:wght@100&family=Michroma&family=Montserrat:wght@600&display=swap"
+        rel="stylesheet">
 </head>
+
+<style>
+    body {
+        font-family: "Sofia", sans-serif;
+        background-color: rgb(34, 33, 36);
+    }
+</style>
 
 <body>
 
@@ -13,18 +25,19 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
 
-    <div id="main" style="display: flex; align-content: center; width: 100%; justify-content: center;">
+    <div id="main" style="display: flex; align-content: center;  justify-content: center;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex;">
-                <div style="display: flex; flex-direction: column; padding: 8px; width: 200; gap: 8px; ">
-                    <h1>SURYA AI</h1>
+            <div style="display: flex; flex-wrap: wrap; padding: 8px; gap: 12px;">
+                <div
+                    style="border-radius: 8px; display: flex; flex-direction: column; padding: 8px; width: 200; gap: 8px; background-color: rgb(151, 152, 152);">
+                    <h2>SURYA AI</h2>
                     <div style="display: flex; gap: 12px;">
                         <div>HISTORY</div>
                         <button id="clear">clear</button>
                     </div>
                     <div id="list_store" style="display: flex; flex-direction: column; gap: 12px;"></div>
                 </div>
-                <div style="display: flex; flex-direction: column;  padding: 8px; gap: 10px;">
+                <div style="display: flex; flex-direction: column; gap: 8px; max-width: 500px;">
                     <div
                         style="height: 300px; background-color: lightgray; border-radius: 8px; padding: 8px; overflow: auto;">
                         <div style="overflow-y: scroll; text-wrap: pretty;" id="content"></div>
