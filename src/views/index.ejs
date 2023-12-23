@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SURYA AI</title>
 </head>
 
 <body>
@@ -18,7 +18,10 @@
             <h1>SURYA AI</h1>
             <div style="display: flex;">
                 <div style="display: flex; flex-direction: column; padding: 8px; width: 200; gap: 8px; ">
-                    <div>HISTORY</div>
+                    <div style="display: flex; gap: 12px;">
+                        <div>HISTORY</div>
+                        <button id="clear">clear</button>
+                    </div>
                     <div id="list_store" style="display: flex; flex-direction: column; gap: 12px;"></div>
                 </div>
                 <div style="display: flex; flex-direction: column;  width: 500px; padding: 8px; gap: 10px;">
@@ -35,17 +38,16 @@
         </div>
 
         <script>
-            const url = `<%= url %>`
-
+            // const host = `<%= url %>`
             var converter = new showdown.Converter();
             munculkan();
             ; (async () => {
 
                 $('#kirim').on("click", async () => {
-                    // const url = "https://surya-ai.wibudev.com"
+
                     const text = $('#input').val()
                     $("#content").text(`${text} \n loading ...`)
-                    const res = await fetch(`${url}/ask/${text}`)
+                    const res = await fetch(`${'<%= url %>'}/ask/${text}`)
                     const result = await res.text()
                     var html = converter.makeHtml(result);
                     $("#content").html(html)
@@ -60,12 +62,18 @@
                     munculkan()
 
                     const main = $("#main").html()
+                    $("#main").html('<div></div>')
                     $("#main").html(main)
 
                 })
 
 
             })()
+
+            $('#clear').on("click", () => {
+                localStorage.setItem("store", "[]")
+                munculkan()
+            })
 
             $('.str').on("click", (val, i) => {
                 console.log(val.target.textContent, "text content")
