@@ -5,7 +5,7 @@ puppeteer.use(pluginStealth);
 pluginStealth.setMaxListeners = () => { };
 const path = require('path')
 const fs = require('fs')
-
+const { execSync } = require('child_process')
 /**
  * 
  * @param {puppeteer.Page} page 
@@ -13,13 +13,14 @@ const fs = require('fs')
  * @param {*} params 
  */
 module.exports = async function (page, browser, text) {
+    const headless = execSync('hostname').toString().trim() !== "bips-MacBook-Air.local"
     if (!page) {
         browser = await puppeteer.launch({
             args: chromium.args,
             // defaultViewport: chromium.defaultViewport,
             dumpio: process.env.STAGE === 'dev',
             executablePath: await chromium.executablePath,
-            headless: true,
+            headless,
             ignoreHTTPSErrors: true,
             slowMo: 250,
             args: [`--window-size=530,720`],
