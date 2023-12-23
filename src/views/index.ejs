@@ -35,15 +35,17 @@
         </div>
 
         <script>
+            const url = `<%= url %>`
+
             var converter = new showdown.Converter();
             munculkan();
             ; (async () => {
 
                 $('#kirim').on("click", async () => {
-                    const url = "https://surya-ai.wibudev.com"
+                    // const url = "https://surya-ai.wibudev.com"
                     const text = $('#input').val()
                     $("#content").text(`${text} \n loading ...`)
-                    const res = await fetch(`http://localhost:3005/ask/${text}`)
+                    const res = await fetch(`${url}/ask/${text}`)
                     const result = await res.text()
                     var html = converter.makeHtml(result);
                     $("#content").html(html)
