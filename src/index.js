@@ -61,7 +61,7 @@ app.get("/screenshot", async (req, res) => {
 
 app.listen(PORT, async () => {
     console.log("start ppt")
-    // await start_ppt()
+    await start_ppt()
     console.log(`server berjalan di port ${PORT}`)
 })
 
