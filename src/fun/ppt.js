@@ -43,6 +43,11 @@ module.exports = async function (page, browser, text) {
         console.log("cookie saved")
     }
 
+    if (text === "screenshot") {
+        await page.screenshot({ path: path.join(__dirname, "./../ast/screenshot.png") });
+        console.log("screenshot diambil")
+    }
+
     if (text === "reload") {
         await page.reload()
     }
