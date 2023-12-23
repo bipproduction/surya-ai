@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/cross-fetch@4.0.0/dist/browser-ponyfill.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+
+    <div id="main" style="display: flex; align-content: center; width: 100%; justify-content: center;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <h1>SURYA AI</h1>
+            <div style="display: flex;">
+                <div style="display: flex; flex-direction: column; padding: 8px; width: 200; gap: 8px; ">
+                    <div>HISTORY</div>
+                    <div id="list_store" style="display: flex; flex-direction: column; gap: 12px;"></div>
+                </div>
+                <div style="display: flex; flex-direction: column;  width: 500px; padding: 8px; gap: 10px;">
+                    <div
+                        style="height: 300px; background-color: lightgray; border-radius: 8px; padding: 8px; overflow: auto;">
+                        <div style="overflow-y: scroll; text-wrap: pretty;" id="content"></div>
+                    </div>
+                    <textarea id="input" placeholder="ask here" style="border-radius: 8px;padding: 8px;" cols="40"
+                        rows="8"></textarea>
+                    <button id="kirim"
+                        style="padding: 12px; background-color: darkslategrey;color: white; border-radius: 8px;">ASK</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var converter = new showdown.Converter();
+            munculkan();
+            ; (async () => {
+
+                $('#kirim').on("click", async () => {
+                    const text = $('#input').val()
+                    $("#content").text(`${text} \n loading ...`)
+                    const res = await fetch(`http://localhost:3005/ask/${text}`)
+                    const result = await res.text()
+                    var html = converter.makeHtml(result);
+                    $("#content").html(html)
+
+                    const store = JSON.parse((localStorage.getItem('store') ?? "[]"))
+                    const store_data = {
+                        q: text,
+                        a: result
+                    }
+                    store.push(store_data)
+                    localStorage.setItem("store", JSON.stringify(store))
+                    munculkan()
+
+                    const main = $("#main").html()
+                    $("#main").html(main)
+
+                })
+
+
+            })()
+
+            $('.str').on("click", (val, i) => {
+                console.log(val.target.textContent, "text content")
+
+                const store = JSON.parse((localStorage.getItem('store') ?? "[]"))
+                const data = store.find((v) => v.q === val.target.textContent)
+                var html = converter.makeHtml(data.a);
+                $("#content").html(`<h1>${data.q}</h1>${html}`)
+            })
+
+            function munculkan() {
+                const store = JSON.parse((localStorage.getItem('store') ?? "[]"))
+                const store_html = store.map((v) => `<button style="text-overflow: ellipsis; width: 200px" class="str">${v.q}</button>`).join("\n")
+                $("#list_store").html(store_html)
+            }
+
+        </script>
+    </div>
+
+
+</body>
+
+</html>
