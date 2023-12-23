@@ -19,7 +19,7 @@ module.exports = async function (page, browser, text) {
             // defaultViewport: chromium.defaultViewport,
             dumpio: process.env.STAGE === 'dev',
             executablePath: await chromium.executablePath,
-            headless: chromium.headless,
+            headless: true,
             ignoreHTTPSErrors: true,
             slowMo: 250,
             args: [`--window-size=530,720`],
