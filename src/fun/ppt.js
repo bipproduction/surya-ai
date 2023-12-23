@@ -23,7 +23,7 @@ module.exports = async function (page, browser, text) {
             headless: headless,
             ignoreHTTPSErrors: true,
             slowMo: 250,
-            args: [`--window-size=530,720`],
+            args: [`--window-size=530,720`, '--no-sandbox'],
         })
         const [p] = await browser.pages()
         page = p
