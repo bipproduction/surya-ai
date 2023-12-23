@@ -6,7 +6,7 @@ const { execSync } = require('child_process')
 const { fetch } = require('cross-fetch')
 const path = require('path')
 
-const PORT = 3005
+const PORT = 3009
 
 var page;
 var browser;
