@@ -49,6 +49,10 @@ app.get("/ask/:text?", async (req, res) => {
     res.send(result)
 })
 
+app.get("/screenshot", async (req, res) => {
+    await ppt(page, browser, "screenshot")
+    res.sendFile(path.join(__dirname, "./ast/screenshot.png"))
+})
 
 app.listen(PORT, async () => {
     console.log("start ppt")
